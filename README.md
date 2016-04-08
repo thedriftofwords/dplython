@@ -157,7 +157,7 @@ def PairwiseGreater(series1, series2):
   return newSeries
 
 diamonds >> PairwiseGreater(X.x, X.y)
-
+```
 ```python
 # Matplotlib works as well!
 import pylab as pl
