@@ -29,6 +29,26 @@ pip install git+https://github.com/dodger487/dplython.git
 
 ## Example usage
 ```python
+
+# Passing entire dataframe and plotting with ggplot
+from ggplot import *
+ggplot = DelayFunction(ggplot)  # Simple installation
+diamonds = DplyFrame(pandas.read_csv('./diamonds.csv'))  # Masked in ggplot pkg
+(diamonds >> ggplot(aes(x="carat", y="price", color="cut"), data=X._) + 
+  geom_point() + facet_wrap("color"))
+```
+![Ggplot example 1](http://dodger487.github.com/figs/dplython/ggplot_img1.png)
+
+```python
+(diamonds >>
+  dfilter((X.clarity == "I1") | (X.clarity == "IF")) >> 
+  ggplot(aes(x="carat", y="price", color="color"), X._) + 
+    geom_point() + 
+    facet_wrap("clarity"))
+```
+![Ggplot example 2](http://dodger487.github.com/figs/dplython/ggplot_img2.png)
+
+``` python
 from dplython import *
 
 # The example `diamonds` DataFrame is included in this package, but you can 
@@ -137,25 +157,6 @@ def PairwiseGreater(series1, series2):
   return newSeries
 
 diamonds >> PairwiseGreater(X.x, X.y)
-
-
-# Passing entire dataframe and plotting with ggplot
-from ggplot import *
-ggplot = DelayFunction(ggplot)  # Simple installation
-diamonds = DplyFrame(pandas.read_csv('./diamonds.csv'))  # Masked in ggplot pkg
-(diamonds >> ggplot(aes(x="carat", y="price", color="cut"), data=X._) + 
-  geom_point() + facet_wrap("color"))
-```
-![Ggplot example 1](http://dodger487.github.com/figs/dplython/ggplot_img1.png)
-
-```python
-(diamonds >>
-  dfilter((X.clarity == "I1") | (X.clarity == "IF")) >> 
-  ggplot(aes(x="carat", y="price", color="color"), X._) + 
-    geom_point() + 
-    facet_wrap("clarity"))
-```
-![Ggplot example 2](http://dodger487.github.com/figs/dplython/ggplot_img2.png)
 
 ```python
 # Matplotlib works as well!
